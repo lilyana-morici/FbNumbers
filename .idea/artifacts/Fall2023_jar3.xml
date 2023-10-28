@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact name="Fall2023:jar3">
+    <output-path>$PROJECT_DIR$/out/artifacts/Fall2023_jar3</output-path>
+    <root id="root">
+      <element id="archive" name="Fall2023.jar">
+        <element id="module-output" name="Fall2023" />
+      </element>
+    </root>
+  </artifact>
+</component>
