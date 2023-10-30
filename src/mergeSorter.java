@@ -1,28 +1,30 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Comparator;
 
-public class mergeSorter {
-    public static List<Integer> mergesort(List<Integer> inputList) {
+public class mergeSorter<T> {
+
+    public List<T> mergeSort(List<T> inputList, Comparator<T> comparator) {
         if (inputList.size() <= 1) {
             return inputList; // Base case: An empty list or a list with one element is already sorted.
         }
 
         int middle = inputList.size() / 2;
-        List<Integer> left = inputList.subList(0, middle);
-        List<Integer> right = inputList.subList(middle, inputList.size());
+        List<T> left = inputList.subList(0, middle);
+        List<T> right = inputList.subList(middle, inputList.size());
 
-        left = mergesort(left);
-        right = mergesort(right);
+        left = mergeSort(left, comparator);
+        right = mergeSort(right, comparator);
 
-        return merge(left, right);
+        return merge(left, right, comparator);
     }
 
-    private static List<Integer> merge(List<Integer> left, List<Integer> right) {
-        List<Integer> result = new ArrayList<>();
+    private List<T> merge(List<T> left, List<T> right, Comparator<T> comparator) {
+        List<T> result = new ArrayList<>();
         int leftIndex = 0, rightIndex = 0;
 
         while (leftIndex < left.size() && rightIndex < right.size()) {
-            if (left.get(leftIndex) < right.get(rightIndex)) {
+            if (comparator.compare(left.get(leftIndex), right.get(rightIndex)) < 0) {
                 result.add(left.get(leftIndex));
                 leftIndex++;
             } else {

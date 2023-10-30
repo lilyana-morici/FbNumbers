@@ -1,6 +1,8 @@
 import java.io.*;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Comparator;
+import java.util.Arrays;
 
 public class Main {
     public static int[] createRandomArray(int arrayLength) {
@@ -38,14 +40,13 @@ public class Main {
         }
     }
 
-    public static void bubbleSort(int[] array) {
+    public static void bubbleSort(int[] array, Comparator<Integer> comparator) {
         int n = array.length;
         boolean swapped;
         do {
             swapped = false;
             for (int i = 1; i < n; i++) {
-                if (array[i - 1] > array[i]) {
-                    // Swap array[i-1] and array[i]
+                if (comparator.compare(array[i - 1], array[i]) > 0) {
                     int temp = array[i - 1];
                     array[i - 1] = array[i];
                     array[i] = temp;
@@ -66,7 +67,9 @@ public class Main {
         System.out.println("Random array has been generated and saved in 'random_array.txt'");
 
         int[] unsortedArray = readFileToArray("random_array.txt");
-        bubbleSort(unsortedArray);
+
+        // Example usage of BubbleSort with integers
+        bubbleSort(unsortedArray, Comparator.naturalOrder());
         writeArrayToFile(unsortedArray, "sorted_array.txt");
         System.out.println("Array has been sorted and saved in 'sorted_array.txt'");
 
